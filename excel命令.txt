@@ -1,0 +1,232 @@
+alt+f11
+
+统计某字符个数:    
+=LEN(A1)-LEN(SUBSTITUTE(A1,"x","")) 
+
+统计单元格重复出现个数:      
+=COUNTIF(A:A,CONCATENATE("*",A2,"*"))
+
+去掉后几位
+=MID(A2701,1,LEN(A2701)-6)
+
+多条件统计：
+=SUMPRODUCT(($AS:$AS=P$1)*($M:$M=$O2))
+
+合并A列单元格:
+Sub tt()
+Application.DisplayAlerts = False
+
+Dim i, a As Integer
+a = 1
+For i = 1 To [A1].End(xlDown).Row
+
+If Cells(i, 1) = Cells(i + 1, 1) Then
+Else
+
+Range(Cells(a, 1), Cells(i, 1)).Merge
+a = 1 + i
+
+End If
+Next i
+Application.DisplayAlerts = True
+End Sub 
+
+拆分A列单元格：
+
+
+Sub 拆分填充()  
+'  
+' 拆分填充 宏  
+'  
+' 快捷键: Ctrl+d'  
+  
+Dim x As Range  
+For Each x In ActiveSheet.UsedRange.Cells  
+If x.MergeCells Then  
+x.Select  
+x.UnMerge  
+Selection.Value = x.Value  
+End If  
+Next x  
+End Sub 
+
+
+查找
+
+=VLOOKUP(A1,sheet2!$A$1:$B$30000,2,FALSE)
+
+=VLOOKUP(A1,[.xls]sheet1!$A$1:$B$30000,2,FALSE)
+
+=VLOOKUP(A1,IF({1,0},Sheet1!B$1:B$30000,Sheet1!A$1:A$30000),2,0) 
+
+逻辑
+
+=IF(A1=B1,"对"，"错")
+
+
+
+Sub 合并相同单元格()
+Dim merng As Range
+Dim r
+r = InputBox("请输入需要合并列")
+Application.DisplayAlerts = False
+Set merng = Range(r & "1")
+For i = 2 To [a65536].End(xlUp).Row
+
+    If Range(r & i) = Range(r & i - 1) Then
+        Set merng = merng.Resize(merng.Count + 1, 1)
+    Else
+        merng.Merge
+        Set merng = Range(r & i)
+    End If
+Next
+merng.Merge
+Application.DisplayAlerts = True
+End Sub
+
+合并某列单元格
+
+
+
+拆分
+
+Private Sub CommandButton1_Click()
+    Dim rg As Range
+    For i = 2 To [a65536].End(xlUp).Row
+        Range("a" & i).Select
+        If Selection.MergeCells = True Then
+            Selection.UnMerge
+            For Each rg In Selection
+                rg.Value = Range("a" & i)
+            Next rg
+        End If
+    Next i
+End Sub
+
+替换换行符:ctrl+enter
+
+拆分表单:
+Sub 如何将一个Excel工作表的数据拆分成多个工作表()
+    Dim Arr, Rng As Range, Sht As Worksheet, Dic As Object
+    Dim k, t, Str As String, i As Long, lc As Long
+    Application.ScreenUpdating = False '关闭屏幕更新
+    Arr = Range("A1").CurrentRegion.Value
+    lc = UBound(Arr, 2) '求取最后一列的列号
+    Set Rng = Rows(1) '标题行
+    Set Dic = CreateObject("Scripting.Dictionary") '创建字典
+    For i = 2 To UBound(Arr)
+        Str = Arr(i, ？) '列号，关键字
+        If Not Dic.Exists(Str) Then '如果字典没有关键字
+            Set Dic(Str) = Cells(i, 1).Resize(, lc) '把当前行装入到字典中
+        Else '否则(字典中存在关键字)
+            Set Dic(Str) = Union(Dic(Str), Cells(i, 1).Resize(, lc)) '把行连合起来
+        End If
+    Next
+    k = Dic.Keys '字典关键字集合
+    t = Dic.Items '字典项目集合
+    On Error Resume Next
+    With Sheets
+        For i = 0 To Dic.Count - 1 '循环关键字的个数
+            Set Sht = .Item(k(i)) '给变量赋值(工作表名为关键字)
+            If Sht Is Nothing Then '该工作表不存在则插入一个空工作表
+                .Add(After:=.Item(.Count)).Name = k(i) '新建的工作表将置于所有工作表之后，并命名为关键字
+                Set Sht = ActiveSheet '活动工作表给变量
+            Else '否则
+                Sht.Cells.Clear '清除工作中所有内容和格式
+            End If
+            Rng.Copy Sht.Range("A1") '把标题写入第一行
+            t(i).Copy Sht.Range("A2") '写入其他内容
+            Sht.Cells.EntireColumn.AutoFit '自动调整全工作表单元格的列宽
+            Set Sht = Nothing '变量处于初始状态
+        Next
+    End With
+    Sheets(1).Activate '第1个工作表处于激活状态
+    Application.ScreenUpdating = True '打开屏幕更新
+End Sub
+
+
+
+
+合并多个文件：（创建一个文件夹，创建一个新文件）
+Sub CombineFiles()
+    Dim path        As String
+    Dim FileName    As String
+    Dim LastCell    As Range
+    Dim Wkb         As Workbook
+    Dim WS          As Worksheet
+    Dim ThisWB      As String
+   
+    Dim MyDir As String
+    MyDir = ThisWorkbook.path & "\"
+    'ChDrive Let't(MyDir,1)'find all the excel files
+    'ChDir MyDir
+    'Match=Dir$("")
+    ThisWB = ThisWorkbook.Name
+    Application.EnableEvents = False
+    Application.ScreenUpdating = False
+    path = MyDir
+    FileName = Dir(path & "\*.xls", vbNormal)
+    Do Until FileName = ""
+        If FileName <> ThisWB Then
+           Set Wkb = Workbooks.Open(FileName:=path & "\" & FileName)
+           For Each WS In Wkb.Worksheets
+               Set LastCell = WS.Cells.SpecialCells(xlCellTypeLastCell)
+               If LastCell.Value = "" And LastCell.Address = Range("$A$1").Address Then
+              Else
+           WS.Copy After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count)
+              End If
+           Next WS
+           Wkb.Close False
+        End If
+        FileName = Dir()
+    Loop
+    Application.EnableEvents = True
+    Application.ScreenUpdating = True
+    Set Wkb = Nothing
+    Set LastCell = Nothing
+End Sub
+
+
+提取单元格
+
+Sub shtname()
+    Dim i As Integer, j As Integer, sht As Worksheet
+    Dim x As Range, y As Range
+    On Error Resume Next
+    Set x = Application.InputBox("请选择要提取的列:", , , , , , , 8)
+    Set y = Application.InputBox("请选择要提取的单元格:", , , , , , , 8)
+    If Not x Is Nothing Then
+        If Not y Is Nothing And y.Count = 1 Then
+            i = 1
+            j = x.Column
+            For Each sht In Worksheets
+                Sheet1.Hyperlinks.Add Cells(i, 1), "", "'" & sht.Name & "'!A1", , sht.Name
+                Cells(i, 2) = sht.Cells(65536, j).End(xlUp).Value
+                Cells(i, 3) = sht.Range(y.Address)
+                i = i + 1
+            Next
+        End If
+    End If
+End Sub
+
+
+合并表单：
+Sub 合并sheets()
+n = ? '源表个数
+nstart = 1 '每个单表数据的起始行数
+k = nstart '目标表的行标
+For i = 1 To n
+irow = nstart '行标
+While Sheets(i).Cells(irow + 1, 1) <> "" '以第2列数据为结束标示,确定源表的行数
+irow = irow + 1
+Wend
+Sheets(i).Rows(nstart & ":" & irow).Copy '复制源数据行
+Sheets(n + 1).Activate
+Sheets(n + 1).Cells(k, 1).Select
+ActiveSheet.Paste '粘贴数据
+k = k + irow - nstart + 1
+Next i
+End Sub
+
+
+
