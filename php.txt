@@ -1,0 +1,20 @@
+命令	                                                    解释
+substr(string,0,length)	                   0是从第一个字开始
+
+strstr(string,instring)	                                   开始的字符的剩余部分，空为false
+
+str_replace(find,replace,str）	
+
+JSON_UNESCAPED_UNICODE	                    json_encode不转译汉字
+
+array_filter	                                   可去除空值
+
+array_unique()	                                   删除重复值
+
+array_unshift($arr,$str)	                   增加变量到数组的开头
+
+Move to Apache24\bin folder libssh2.dll	   php 支持 curl_init()
+
+in_array(search,array)	                   返回true false
+
+array_count_values()	                                   数组各值个数

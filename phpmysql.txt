@@ -9,5 +9,7 @@ UPDATE lzmw SET dszg= CASE WHEN dszg=1 THEN 0  WHEN dszg=0   THEN 1  END  WHERE 
 
 count(stu_num='' or null)    按条件进行统计
 
+select len(@s)-len(replace(@s,'A',''))           查找某字段虽某字符出现次数
 
+GROUP_CONCAT(stuName ORDER BY score ASC) 分组并且字符串排序
 

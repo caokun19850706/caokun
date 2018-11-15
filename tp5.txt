@@ -1,0 +1,3 @@
+  \think\facade\App::version();        ²é¿´°æ±¾ºÅ
+
+field('user_id,content',true)	ÅÅ³ý×Ö¶Î
