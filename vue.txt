@@ -1,0 +1,9 @@
+vue 框架里 js for（var i; ...) 不能 for( i ; ..)
+
+vue 里面的延迟
+if (self && !self._isDestroyed) {
+                        setTimeout(() => {
+                            if (self && !self._isDestroyed)
+                                self.hea_img_get();
+                        },2000);
+} 

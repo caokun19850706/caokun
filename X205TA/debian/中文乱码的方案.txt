@@ -1,0 +1,41 @@
+国内源下载对应镜像（debian-9.0.0-amd64-xfce-CD-1.iso）总大小为660M，相当小巧。
+
+Debian安装过程已经非常简单了，可选中文语言安装，安装过程跟随安装引导安装即可。
+
+系统安装完第一步是要更新软件源的，国内多使用163的源（经过测试，确实更快）
+打开终端进入并切换root账户：
+$ su
+修改sources.list文件，注释掉光盘镜像添加以下内容
+$ /etc/apt/sources.list
+deb http://mirrors.163.com/debian/ stretch main contrib non-free
+deb http://mirrors.163.com/debian/ stretch-updates main contrib non-free
+deb http://mirrors.163.com/debian-security/ stretch/updates main contrib non-free
+deb http://mirrors.163/com/debian/ stretch-proposed-updates main contrib non-free
+
+添加后保存，更新源使之生效
+$ apt-get update
+更新源后，可直接使用apt-get install安装软件仓库所有软件，非常方便。
+本次使用CD镜像安装后出现自提乱码现象，需要安装对应字体，并变更系统默认字体。
+中文乱码解决
+安装locales并打开
+$ apt-get install locales
+$ dpkg-reconfigure locales
+配置编码进入选择：(空格键是选择，选择完了后Tab切换到OK，再ENTER确认）
+en_US.UTF8
+zh_CN GB2312
+zh_CN GBK GBK
+zh_CN UTF-8 UTF-8
+
+修改locale文件
+$ /etc/default/locale
+LANG=en_US.UTF-8
+
+如果还有方块需要装字体：
+$ apt-get install ttf-arphic-uming
+$ apt-get install ttf-wqy-zenhei
+$ reboot
+
+作者：江月末如侍
+链接：https://www.jianshu.com/p/128ea159b587
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
