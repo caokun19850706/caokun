@@ -1,0 +1,12 @@
+
+
+    整合php和mysql
+
+    sudo apt-get install php7.0-mysql
+
+    整合php和Apache
+
+    sudo apt-get install libapache2-mod-php7.0
+    # ...
+    sudo service apache2 restart
+
