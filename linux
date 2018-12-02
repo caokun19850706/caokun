@@ -1,1 +1,23 @@
 echo 2200 > /sys/class/backlight/intel_backlight/brightness debian 调整亮度
+
+debian 源
+
+deb http://mirrors.163.com/debian/ stretch main non-free contrib
+
+deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib
+
+deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib
+
+deb-src http://mirrors.163.com/debian/ stretch main non-free contrib
+
+deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib
+
+deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib
+
+deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
+
+deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
+
+
+wbpinyin fcitx 输入法
+
