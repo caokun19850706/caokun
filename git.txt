@@ -1,60 +1,105 @@
-git config --list	查看配置
+﻿git config --list	查看配置
 
-"git status
+
+
+"git status   
 git status -s"	想看状态
+
+
 
 git commit -am '修改 hello.php 文件'	直接提交所有更改
 
+
+
 cat	新建、查看、合并文件
+
 
 $ echo 'runoob.com' > test.txt	
 
-"$ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
-$ yum install git"	安装git
+"
 
-"$ groupadd git
-$ useradd git -g git"	创建git用户组和用户名
+$ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
 
-"$ cd /home/git/
+
+$ yum install git      "	安装git
+
+"
+$ groupadd git
+
+$ useradd git -g git                 "	创建git用户组和用户名
+
+"
+$ cd /home/git/
+
 $ mkdir .ssh
+
 $ chmod 755 .ssh
+
 $ touch .ssh/authorized_keys
+
 $ chmod 644 .ssh/authorized_keys"	创建公钥存放文件
 
-"$ cd /home
+"
+$ cd /home
 $ mkdir gitrepo
+
 $ chown git:git gitrepo/
+
 $ cd gitrepo
+
 $ git init --bare runoob.git
-Initialized empty Git repository in /home/gitrepo/runoob.git/"	创建仓库目录和仓库名
+          Initialized empty Git repository in /home/gitrepo/runoob.git/               "	创建仓库目录和仓库名
+
 
 $ chown -R git:git runoob.git	更改仓库所属用户
 
-git -commit -a -m	跳过git add
 
-git@39.106.172.140:/home/gitrepo/runoob.git	远程仓库地址
+git -commit -a -m	跳过
+git add
+
+ git@39.106.172.140:/home/gitrepo/runoob.git	远程仓库地址
+
 
 git remote add [name] [address]	添加远程程序
 
+
+
 git push -f	强制推送本地目录
+
+
 
 git pull origin master --allow-unrelated-histories	冲突硬拉
 
+
 git ls-files	查看所有已跟踪文件
+
 
 git remote set-url origin	更改远程地址 
 
-"git fetch --all  
-git reset --hard origin/master "	运程强制覆盖本地
+"
+git fetch --all  
 
-"git rm -r --cached . 　　//不删除本地文件
+git reset --hard origin/master                 "	运程强制覆盖本地
+
+"g
+it rm -r --cached . 　　//不删除本地文件
+
 git rm -r --f . 　　//删除本地文件对某个文件取消跟踪
 
+
 git rm --cached readme1.txt    删除readme1.txt的跟踪，并保留在本地。
+
 git rm --f readme1.txt    删除readme1.txt的跟踪，并且删除本地文件。然后git commit 即可。但是git status查看状态时还是会列出来"	
 
+
+
 cd /www/web/
+
 unset GIT_DIR
+
 git config --list
+
 git pull a master
-git的hooks 推送后自动部署
+     git的hooks 推送后自动部署
+
+
