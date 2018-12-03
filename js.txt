@@ -27,3 +27,6 @@ arr.includes('c')	数组中查找某值，true/false
 var a = {}	组装带键名的数组时要用object
 
 
+
+
+item.hasOwnProperty('suber')   是否存在某键

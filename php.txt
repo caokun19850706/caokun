@@ -18,3 +18,7 @@ Move to Apache24\bin folder libssh2.dll	   php 支持 curl_init()
 in_array(search,array)	                   返回true false
 
 array_count_values()	                                   数组各值个数
+
+$roo_ran="left(bid,8) in ('".implode("','",$room)."')";  负责范围
+
+array_map("myfu",$a); function myfu($a) { }

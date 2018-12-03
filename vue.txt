@@ -7,3 +7,5 @@ if (self && !self._isDestroyed) {
                                 self.hea_img_get();
                         },2000);
 } 
+
+ @keydown.enter.stop.prevent="search()"    按下回国
